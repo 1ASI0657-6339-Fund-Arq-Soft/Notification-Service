@@ -5,8 +5,6 @@ import jakarta.validation.constraints.NotNull;
 import pe.edu.upc.center.seniorhub.notification.domain.model.commands.CreateNotificationCommand;
 import pe.edu.upc.center.seniorhub.notification.shared.domain.aggregates.AuditableAbstractAggregateRoot;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "notifications")
 public class Notification extends AuditableAbstractAggregateRoot<Notification> {
@@ -21,10 +19,6 @@ public class Notification extends AuditableAbstractAggregateRoot<Notification> {
     @NotNull
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
-
-    @NotNull
-    @Column(nullable = false)
-    private LocalDateTime timestamp;
 
     @NotNull
     @Column(nullable = false)
@@ -43,11 +37,10 @@ public class Notification extends AuditableAbstractAggregateRoot<Notification> {
     private String type;
 
     // Constructor completo
-    public Notification(String title, String content, LocalDateTime timestamp, String status, 
+    public Notification(String title, String content, String status, 
                        Long userId, Long recipientId, String type) {
         this.title = title;
         this.content = content;
-        this.timestamp = timestamp;
         this.status = status;
         this.userId = userId;
         this.recipientId = recipientId;
@@ -59,7 +52,6 @@ public class Notification extends AuditableAbstractAggregateRoot<Notification> {
         this(
                 command.title(),
                 command.content(),
-                LocalDateTime.now(),
                 "unread",
                 command.userId(),
                 command.recipientId(),
@@ -92,10 +84,6 @@ public class Notification extends AuditableAbstractAggregateRoot<Notification> {
 
     public String getContent() {
         return content;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
     }
 
     public String getStatus() {

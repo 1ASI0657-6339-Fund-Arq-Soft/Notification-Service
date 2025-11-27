@@ -9,11 +9,11 @@ public class NotificationResourceFromEntityAssembler {
                 entity.getId(),
                 entity.getTitle(),
                 entity.getContent(),
-                entity.getTimestamp(),
                 entity.getStatus(),
                 entity.getUserId(),
                 entity.getRecipientId(),
-                entity.getType()
+                entity.getType(),
+                entity.getCreatedAt()
         );
     }
 }
